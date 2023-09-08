@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Card } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
-import './styles/tooltip.css'
+import '../styles/timerComponent.css'
 
-const TooltipComponent = () => {
+const TimerComponent = () => {
   
    const currentTime = useSelector((state) => state.timer.currentTime);
   useEffect(() => {
@@ -45,4 +45,4 @@ const TooltipComponent = () => {
   );
 };
 
-export default TooltipComponent;
+export default TimerComponent;
