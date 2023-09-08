@@ -5,7 +5,7 @@ import { updateTime } from "./redux/timerSlice";
 
 import "./App.css";
 import Timer from "./components/Timer";
-import TimerComponent from "./components/Tooltip";
+import TimerComponent from "./components/TimerComponent";
 
 function App() {
   const dispatch = useDispatch();
