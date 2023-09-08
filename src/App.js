@@ -5,6 +5,7 @@ import { updateTime } from "./redux/timerSlice";
 
 import "./App.css";
 import Timer from "./components/Timer";
+import TooltipComponent from "./Tooltip";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className="app">
       <Timer />
+      <TooltipComponent/>
       
     </div>
   );

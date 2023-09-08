@@ -1,0 +1,32 @@
+.tooltip-card{
+    font-size: 5rem;
+    padding: 25px;
+    cursor: pointer;
+    font-size: 5rem;
+    width: 850px;
+    
+}
+[data-tooltip] {
+    border-bottom: 1px dotted #777;
+    cursor: pointer;
+}
+
+[data-tooltip]:after {
+    content: attr(data-tooltip);
+    display: none;
+    position: fixed;
+    max-width: 600px;
+    background: #202020;
+    border: 1px solid #999;
+    padding: 12px;
+    color: whitesmoke;
+    border-radius: 5px;
+    margin: 0;
+    font-size: 1.5rem;
+    left: 50px;
+    top: 25px;
+    z-index: 10;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    line-height: 1.3em;
+}
+

@@ -1,40 +1,48 @@
-import React , {useState} from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Tooltip, Card } from "reactstrap";
-
+import React, { useEffect } from "react";
+import { Card } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTooltip } from "./redux/tooltipSlicer";
 
+import './styles/tooltip.css'
 
-function ToolTip() {
-  const [time, setTime] = useState(new Date())
+const TooltipComponent = () => {
+  
+   const currentTime = useSelector((state) => state.timer.currentTime);
+  useEffect(() => {
+    const cssSheet = document.styleSheets[0];
+    
+    const hoverIndex = cssSheet.insertRule(
+      "[data-tooltip]:hover:after {}",
+      cssSheet.cssRules.length
+    );
+    const cssHover = cssSheet.cssRules[hoverIndex];
 
-  const dispatch = useDispatch()
-   const isOpen = useSelector((state) => state.tooltip.isOpen);
-   const currentTime = useSelector((state) => state.timer.currentTime)
+    const handleMouseMove = (e) => {
+      const item = document.querySelector("[data-tooltip]");
+
+      
+        if (item.dataset.tooltip === "") {
+          cssHover.style.display = "none";
+          return;
+        }
+
+        cssHover.style.display = "block";
+        cssHover.style.left = e.clientX + 15 + "px";
+        cssHover.style.top = e.clientY - 60 + "px";
+      ;
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
-    <div
-      style={{
-        display: "block",
-        width: 900,
-        padding: 30,
-      }}
-    >
-      <Card id="Tooltip" style={{cursor:"pointer"}} className="secondary">{currentTime.toLocaleTimeString()}</Card>
-      <Tooltip
-        delay={{ hide: 1000 }}
-        isOpen={isOpen}
-        placement="top-end"
-        target="Tooltip"
-        toggle={() => {
-          dispatch(toggleTooltip(!isOpen));
-        }}
-      >
-        {new Date().toLocaleTimeString()}
-      </Tooltip>
-    </div>
+    <p>
+      <Card className="tooltip-card" data-tooltip={currentTime}>{currentTime}</Card>
+    </p>
   );
-}
+};
 
-export default ToolTip;
+export default TooltipComponent;
